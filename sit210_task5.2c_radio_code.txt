@@ -1,0 +1,69 @@
+#armaan chetal
+#roll no 2110994755
+from tkinter import* #tkinter library imported with other libraries
+import tkinter . font
+from gpiozero import LED
+import RPi.GPIO
+RPi.GPIO.setmode(RPi.GPIO.BCM)
+
+#hardware setup
+Redled=LED(10) #10    GPIO pins 10,9,11 for led of differnt colours
+Greenled=LED(9) #9
+Yellowled=LED(11)#11
+#GUI DEFINATIONS
+win=Tk() #the wind
+win.title("LED toggler")
+myFont=tkinter.font.Font(family="Helvetica",size=12,weight="bold")
+
+##Event funcitons
+radio=IntVar()
+
+def Toggle():
+    if radio.get()==1:
+        if Redled.is_lit:
+            Redled.off()
+        else:
+             Redled.on()
+             Greenled.off()
+             Yellowled.off()
+    elif radio.get() == 2:
+        if Greenled.is_lit:
+            Greenled.off()
+        else:
+            Greenled.on()
+            Redled.off()
+            Yellowled.off()
+    elif radio.get() == 3:
+        if Yellowled.is_lit:
+            Yellowled.off()
+        else:
+            Yellowled.on()
+            Redled.off()
+            Greenled.off()
+            
+
+def close():
+    Redled.off()
+    Yellowled.off()
+    Greenled.off()
+    RPi.GPIO.cleanup()
+    win.destroy()
+
+#pack is inbuilt method of tkinter which packs the widgets manages in relative position
+#anchor is a constant used for defining the alignment of the widgets in this case w refers to left alignment
+
+Red = Radiobutton(win,text="RED", variable=radio, value=1, command=Toggle)
+Red.pack(anchor=W)
+
+Yellow = Radiobutton(win,text="Yellow", variable=radio, value=3, command=Toggle)
+Yellow.pack(anchor=W)
+
+Green = Radiobutton(win,text="Green", variable=radio, value=2, command=Toggle)
+Green.pack(anchor=W)
+
+
+exitButton=Button(win,text="exit",font=myFont,command=close,bg="yellow",height=1,width=6)
+exitButton.pack(anchor=W)
+
+win.protocol("WM_DELETE_WINDOW",close) #led turns off when window is closed
+win.mainloop()
