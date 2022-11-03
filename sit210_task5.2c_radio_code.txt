@@ -52,17 +52,17 @@ def close():
 #pack is inbuilt method of tkinter which packs the widgets manages in relative position
 #anchor is a constant used for defining the alignment of the widgets in this case w refers to left alignment
 
-Red = Radiobutton(win,text="RED", variable=radio, value=1, command=Toggle)
+Red = Radiobutton(win,text="RED", variable=radio, value=1, command=Toggle,bg="red")
 Red.pack(anchor=W)
 
-Yellow = Radiobutton(win,text="Yellow", variable=radio, value=3, command=Toggle)
+Yellow = Radiobutton(win,text="Yellow", variable=radio, value=3, command=Toggle,bg="yellow")
 Yellow.pack(anchor=W)
 
-Green = Radiobutton(win,text="Green", variable=radio, value=2, command=Toggle)
+Green = Radiobutton(win,text="Green", variable=radio, value=2, command=Toggle,bg="green")
 Green.pack(anchor=W)
 
 
-exitButton=Button(win,text="exit",font=myFont,command=close,bg="yellow",height=1,width=6)
+exitButton=Button(win,text="exit",font=myFont,command=close,bg="purple",height=1,width=6)
 exitButton.pack(anchor=W)
 
 win.protocol("WM_DELETE_WINDOW",close) #led turns off when window is closed
